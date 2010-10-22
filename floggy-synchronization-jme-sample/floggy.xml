@@ -1,0 +1,13 @@
+<floggy xmlns="http://floggy.sourceforge.net/floggy-persistence-1.4.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://floggy.sourceforge.net/floggy-persistence-1.4.0 http://floggy.sourceforge.net/schema/floggy-persistence-1.4.0.xsd">
+	<persistables>
+		<persistable class-name="org.floggy.synchronization.jme.sample.model.Surfer" record-store-name="Surfer">
+			<indexes>
+				<index name="byName">
+					<field>name</field>
+				</index>
+			</indexes>
+		</persistable>
+	</persistables>
+</floggy>
