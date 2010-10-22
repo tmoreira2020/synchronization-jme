@@ -16,15 +16,15 @@
 package org.floggy.synchronization.jme.maven;
 
 import java.io.File;
-
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
+import net.sourceforge.floggy.maven.MavenLogWrapper;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.logging.LogFactory;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
-
 import org.floggy.synchronization.jme.weaver.Configuration;
 import org.floggy.synchronization.jme.weaver.Weaver;
 
@@ -82,6 +82,12 @@ public class SynchronizationMojo extends AbstractMojo {
 	* @throws MojoExecutionException DOCUMENT ME!
 	*/
 	public void execute() throws MojoExecutionException {
+		MavenLogWrapper.setLog(getLog());
+
+		LogFactory.getFactory().setAttribute(
+				"org.apache.commons.logging.Log",
+				"net.sourceforge.floggy.maven.MavenLogWrapper");
+
 		Weaver weaver = new Weaver();
 
 		try {
