@@ -38,9 +38,9 @@
 		</license>
 	</licenses>
 	<scm>
-		<connection>scm:git:git-tmoreira2020@free1.projectlocker.com:floggy_synchronization_jme.git</connection>
-		<developerConnection>scm:git:git-tmoreira2020@free1.projectlocker.com:floggy_synchronization_jme.git</developerConnection>
-		<url>https://free1.projectlocker.com/tmoreira2020/floggy_synchronization_jme/trac/browser</url>
+		<connection>scm:git:tmoreira2020@github.com:synchronization-jme.git</connection>
+		<developerConnection>scm:git:tmoreira2020@github.com:synchronization-jme.git</developerConnection>
+		<url>https://github.com/tmoreira2020/synchronization-jme</url>
 	</scm>
 	<repositories>
 		<repository>
@@ -195,15 +195,6 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.0-beta-9</version>
-				<inherited>true</inherited>
-				<configuration>
-					<tagBase>https://floggy.svn.sourceforge.net/svnroot/floggy/tags</tagBase>
-				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
