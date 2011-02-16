@@ -87,6 +87,7 @@ public class SurferForm extends Form implements CommandListener {
 				this.surfer.setName(this.txtName.getString());
 				this.surfer.setPassport(this.txtPassport.getString());
 				this.surfer.setBornDate(this.dtBornDate.getDate());
+				this.surfer.setBoardSize(this.txtBoardSize.getString());
 				this.surfer.setWaxedHair(this.cgWaxedHair.isSelected(0));
 				pm.save(this.surfer);
 			} catch (FloggyException e) {
@@ -115,7 +116,7 @@ public class SurferForm extends Form implements CommandListener {
 
 		this.cgWaxedHair = new ChoiceGroup("Waxed hair:", ChoiceGroup.EXCLUSIVE);
 		this.cgWaxedHair.append("Yes", null);
-		this.cgWaxedHair.append("Goverment", null);
+		this.cgWaxedHair.append("No", null);
 		this.cgWaxedHair.setSelectedIndex(0, surfer.getWaxedHair());
 		this.cgWaxedHair.setSelectedIndex(1, !surfer.getWaxedHair());
 		this.append(cgWaxedHair);
