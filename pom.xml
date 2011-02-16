@@ -277,6 +277,6 @@
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<microemu.version>3.0.0-SNAPSHOT</microemu.version>
+		<microemu.version>2.0.4</microemu.version>
 	</properties>
 </project>
