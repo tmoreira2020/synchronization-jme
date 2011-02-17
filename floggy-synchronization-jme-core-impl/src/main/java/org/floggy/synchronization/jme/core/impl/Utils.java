@@ -103,9 +103,10 @@ public class Utils {
 		Reader reader = new InputStreamReader(in);
 		StringBuffer buffer = new StringBuffer();
 		char[] temp = new char[512];
+		int lenght;
 
-		while (reader.read(temp) != -1) {
-			buffer.append(temp);
+		while ((lenght = reader.read(temp)) != -1) {
+			buffer.append(temp, 0, lenght);
 		}
 
 		return buffer.toString();
