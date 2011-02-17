@@ -131,4 +131,15 @@ public class Utils {
 				+ " is not a valid synchronizable class. Check the weaver execution!");
 		}
 	}
+
+	public static __Synchronizable createInstance(Class synchronizableClass)
+		throws SynchronizationException {
+		validateSynchronizableClassArgument(synchronizableClass);
+	
+		try {
+			return (__Synchronizable) synchronizableClass.newInstance();
+		} catch (Exception ex) {
+			throw handleException(ex);
+	}
+}
 }
