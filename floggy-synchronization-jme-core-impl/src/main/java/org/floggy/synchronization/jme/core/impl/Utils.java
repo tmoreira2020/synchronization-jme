@@ -72,6 +72,10 @@ public class Utils {
 	* @return DOCUMENT ME!
 	*/
 	public static SynchronizationException handleException(Exception exception) {
+		if (exception instanceof RuntimeException) {
+			throw ((RuntimeException) exception);
+		}
+
 		if (exception instanceof SynchronizationException) {
 			return ((SynchronizationException) exception);
 		}
