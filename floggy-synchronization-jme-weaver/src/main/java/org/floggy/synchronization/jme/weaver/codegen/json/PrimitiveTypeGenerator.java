@@ -101,10 +101,10 @@ public class PrimitiveTypeGenerator extends SourceCodeGenerator {
 		if (name.equals(char.class.getName()) || name.equals(byte.class.getName())
 			 || name.equals(short.class.getName())
 			 || name.equals(float.class.getName())) {
-			addReceiveCode("this." + fieldName + " = (" + name
+			addLineOfCodeToReceiveOperation("this." + fieldName + " = (" + name
 				+ ") jsonObject.getInt(\"" + fieldName + "\");");
 		} else {
-			addReceiveCode("this." + fieldName + " = jsonObject.get"
+			addLineOfCodeToReceiveOperation("this." + fieldName + " = jsonObject.get"
 				+ PrimitiveTypeGenerator.getType(fieldType) + "(\"" + fieldName
 				+ "\");");
 		}
@@ -136,10 +136,10 @@ public class PrimitiveTypeGenerator extends SourceCodeGenerator {
 		String name = fieldType.getName();
 
 		if (name.equals(float.class.getName())) {
-			addSendCode("stringer.key(\"" + fieldName + "\").value((double)"
+			addLineOfCodeToSendOperation("stringer.key(\"" + fieldName + "\").value((double)"
 				+ fieldName + ");");
 		} else {
-			addSendCode("stringer.key(\"" + fieldName + "\").value(" + fieldName
+			addLineOfCodeToSendOperation("stringer.key(\"" + fieldName + "\").value(" + fieldName
 				+ ");");
 		}
 	}

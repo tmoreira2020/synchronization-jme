@@ -41,7 +41,7 @@ public class StringBufferGenerator extends SourceCodeGenerator {
 	* @throws NotFoundException DOCUMENT ME!
 	*/
 	public void initReceiveCode() throws NotFoundException {
-		addReceiveCode("this." + fieldName
+		addLineOfCodeToReceiveOperation("this." + fieldName
 			+ "= org.floggy.synchronization.jme.core.impl.JSONSerializationManager.receiveStringBuffer(\""
 			+ fieldName + "\", jsonObject);");
 	}
@@ -63,7 +63,7 @@ public class StringBufferGenerator extends SourceCodeGenerator {
 	* @throws NotFoundException DOCUMENT ME!
 	*/
 	public void initSendCode() throws NotFoundException {
-		addSendCode(
+		addLineOfCodeToSendOperation(
 			"org.floggy.synchronization.jme.core.impl.JSONSerializationManager.send(\""
 			+ fieldName + "\", this." + fieldName + ", stringer);");
 	}

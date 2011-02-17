@@ -43,7 +43,7 @@ public class DateGenerator extends SourceCodeGenerator {
 	* @throws NotFoundException DOCUMENT ME!
 	*/
 	public void initReceiveCode() throws NotFoundException {
-		addReceiveCode("this." + fieldName
+		addLineOfCodeToReceiveOperation("this." + fieldName
 			+ "= org.floggy.synchronization.jme.core.impl.JSONSerializationManager.receiveDate(\""
 			+ fieldName + "\", jsonObject);");
 	}
@@ -54,7 +54,7 @@ public class DateGenerator extends SourceCodeGenerator {
 	* @throws NotFoundException DOCUMENT ME!
 	*/
 	public void initSendCode() throws NotFoundException {
-		addSendCode(
+		addLineOfCodeToSendOperation(
 			"org.floggy.synchronization.jme.core.impl.JSONSerializationManager.sendDate(\""
 			+ fieldName + "\", this." + fieldName + ", stringer);");
 	}

@@ -107,7 +107,7 @@ public abstract class SourceCodeGenerator {
 	*
 	* @param part DOCUMENT ME!
 	*/
-	protected void addReceiveCode(String part) {
+	protected void addLineOfCodeToReceiveOperation(String part) {
 		this.receiveCode.append(part);
 		this.receiveCode.append('\n');
 	}
@@ -117,7 +117,7 @@ public abstract class SourceCodeGenerator {
 	*
 	* @param part DOCUMENT ME!
 	*/
-	protected void addSendCode(String part) {
+	protected void addLineOfCodeToSendOperation(String part) {
 		this.sendCode.append(part);
 		this.sendCode.append('\n');
 	}

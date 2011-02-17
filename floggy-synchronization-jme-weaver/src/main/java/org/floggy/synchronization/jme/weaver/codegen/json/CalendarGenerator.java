@@ -41,7 +41,7 @@ public class CalendarGenerator extends SourceCodeGenerator {
 	* @throws NotFoundException DOCUMENT ME!
 	*/
 	public void initReceiveCode() throws NotFoundException {
-		addReceiveCode("this." + fieldName
+		addLineOfCodeToReceiveOperation("this." + fieldName
 			+ "= org.floggy.synchronization.jme.core.impl.JSONSerializationManager.receiveCalendar(\""
 			+ fieldName + "\", jsonObject);");
 	}
@@ -52,7 +52,7 @@ public class CalendarGenerator extends SourceCodeGenerator {
 	* @throws NotFoundException DOCUMENT ME!
 	*/
 	public void initSendCode() throws NotFoundException {
-		addSendCode(
+		addLineOfCodeToSendOperation(
 			"org.floggy.synchronization.jme.core.impl.JSONSerializationManager.sendCalendar(\""
 			+ fieldName + "\", this." + fieldName + ", stringer);");
 	}

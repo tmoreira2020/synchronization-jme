@@ -42,7 +42,7 @@ public class VectorGenerator extends SourceCodeGenerator
 	* @throws NotFoundException DOCUMENT ME!
 	*/
 	public void initReceiveCode() throws NotFoundException {
-		addReceiveCode("this." + fieldName
+		addLineOfCodeToReceiveOperation("this." + fieldName
 			+ "= org.floggy.synchronization.jme.core.impl.JSONSerializationManager.receiveVector(\""
 			+ fieldName + "\", jsonObject);");
 	}
@@ -53,7 +53,7 @@ public class VectorGenerator extends SourceCodeGenerator
 	* @throws NotFoundException DOCUMENT ME!
 	*/
 	public void initSendCode() throws NotFoundException {
-		addSendCode(
+		addLineOfCodeToSendOperation(
 			"org.floggy.synchronization.jme.core.impl.JSONSerializationManager.sendVector(\""
 			+ fieldName + "\", this." + fieldName + ", stringer);");
 	}

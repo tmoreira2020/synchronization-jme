@@ -45,11 +45,11 @@ public class PersistableGenerator extends SourceCodeGenerator {
 	*/
 	public void initReceiveCode() throws NotFoundException {
 		if (Modifier.isAbstract(fieldType.getModifiers())) {
-			addReceiveCode("this." + fieldName + "= (" + fieldType.getName()
+			addLineOfCodeToReceiveOperation("this." + fieldName + "= (" + fieldType.getName()
 				+ ")org.floggy.synchronization.jme.core.impl.JSONSerializationManager.receivePersistable(\""
 				+ fieldName + "\", jsonObject);");
 		} else {
-			addReceiveCode("this." + fieldName + "= (" + fieldType.getName()
+			addLineOfCodeToReceiveOperation("this." + fieldName + "= (" + fieldType.getName()
 				+ ")org.floggy.synchronization.jme.core.impl.JSONSerializationManager.receivePersistable(\""
 				+ fieldName + "\", jsonObject);");
 		}
@@ -61,7 +61,7 @@ public class PersistableGenerator extends SourceCodeGenerator {
 	* @throws NotFoundException DOCUMENT ME!
 	*/
 	public void initSendCode() throws NotFoundException {
-		addSendCode(
+		addLineOfCodeToSendOperation(
 			"org.floggy.synchronization.jme.core.impl.JSONSerializationManager.sendPersistable(\""
 			+ fieldName + "\", this." + fieldName + ", stringer);");
 	}

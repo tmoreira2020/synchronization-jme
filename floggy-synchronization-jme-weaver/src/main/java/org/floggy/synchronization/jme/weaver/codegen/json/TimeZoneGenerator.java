@@ -41,7 +41,7 @@ public class TimeZoneGenerator extends SourceCodeGenerator {
 	* @throws NotFoundException DOCUMENT ME!
 	*/
 	public void initReceiveCode() throws NotFoundException {
-		addReceiveCode("this." + fieldName
+		addLineOfCodeToReceiveOperation("this." + fieldName
 			+ "= org.floggy.synchronization.jme.core.impl.JSONSerializationManager.receiveTimeZone(\""
 			+ fieldName + "\", jsonObject);");
 	}
@@ -52,7 +52,7 @@ public class TimeZoneGenerator extends SourceCodeGenerator {
 	* @throws NotFoundException DOCUMENT ME!
 	*/
 	public void initSendCode() throws NotFoundException {
-		addSendCode(
+		addLineOfCodeToSendOperation(
 			"org.floggy.synchronization.jme.core.impl.JSONSerializationManager.sendTimeZone(\""
 			+ fieldName + "\", this." + fieldName + ", stringer);");
 	}

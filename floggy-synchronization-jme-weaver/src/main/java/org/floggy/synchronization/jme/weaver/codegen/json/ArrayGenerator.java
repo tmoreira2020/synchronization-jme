@@ -50,23 +50,23 @@ public class ArrayGenerator extends SourceCodeGenerator
 	public void initReceiveCode() throws NotFoundException {
 		SourceCodeGenerator generator;
 
-		addReceiveCode(
+		addLineOfCodeToReceiveOperation(
 			"org.floggy.org.json.me.JSONArray jsonArray = jsonObject.getJSONArray(\""
 			+ fieldName + "\");");
-		addReceiveCode("if (jsonArray != null) {");
-		addReceiveCode("int count = jsonArray.length();");
-		addReceiveCode("this." + fieldName + " = new "
+		addLineOfCodeToReceiveOperation("if (jsonArray != null) {");
+		addLineOfCodeToReceiveOperation("int count = jsonArray.length();");
+		addLineOfCodeToReceiveOperation("this." + fieldName + " = new "
 			+ fieldType.getComponentType().getName() + "[count];");
-		addReceiveCode("for(int " + indexForIteration + " = 0; "
+		addLineOfCodeToReceiveOperation("for(int " + indexForIteration + " = 0; "
 			+ indexForIteration + " < count; " + indexForIteration + "++) {");
 		generator = SourceCodeGeneratorFactory.getSourceCodeGenerator(persistableType,
 				fieldName + "[" + indexForIteration + "]", fieldType.getComponentType());
-		addReceiveCode(generator.getReceiveCode());
-		addReceiveCode("}");
-		addReceiveCode("}");
-		addReceiveCode("else {");
-		addReceiveCode(fieldName + " = null;");
-		addReceiveCode("}");
+		addLineOfCodeToReceiveOperation(generator.getReceiveCode());
+		addLineOfCodeToReceiveOperation("}");
+		addLineOfCodeToReceiveOperation("}");
+		addLineOfCodeToReceiveOperation("else {");
+		addLineOfCodeToReceiveOperation(fieldName + " = null;");
+		addLineOfCodeToReceiveOperation("}");
 	}
 
 	/**
@@ -88,18 +88,18 @@ public class ArrayGenerator extends SourceCodeGenerator
 	public void initSendCode() throws NotFoundException {
 		SourceCodeGenerator generator;
 
-		addSendCode("if(" + "this." + fieldName + " != null) {");
-		addSendCode("stringer.key(\"" + fieldName + "\");");
-		addSendCode("stringer.array();");
-		addSendCode("int count = this." + fieldName + ".length;");
-		addSendCode("for(int " + indexForIteration + " = 0; " + indexForIteration
+		addLineOfCodeToSendOperation("if(" + "this." + fieldName + " != null) {");
+		addLineOfCodeToSendOperation("stringer.key(\"" + fieldName + "\");");
+		addLineOfCodeToSendOperation("stringer.array();");
+		addLineOfCodeToSendOperation("int count = this." + fieldName + ".length;");
+		addLineOfCodeToSendOperation("for(int " + indexForIteration + " = 0; " + indexForIteration
 			+ " < count; " + indexForIteration + "++) {");
 		generator = SourceCodeGeneratorFactory.getSourceCodeGenerator(persistableType,
 				fieldName + "[" + indexForIteration + "]", fieldType.getComponentType());
-		addSendCode(generator.initSendArrayCode());
-		addSendCode("}");
-		addSendCode("stringer.endArray();");
-		addSendCode("}");
+		addLineOfCodeToSendOperation(generator.initSendArrayCode());
+		addLineOfCodeToSendOperation("}");
+		addLineOfCodeToSendOperation("stringer.endArray();");
+		addLineOfCodeToSendOperation("}");
 	}
 
 	/**
