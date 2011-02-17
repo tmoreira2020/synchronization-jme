@@ -568,7 +568,8 @@ public class JSONSerializationManager {
 			stringer.value(null);
 		} else {
 			stringer.object();
-			stringer.key("ID").value(value.getTimeZone().getID());
+			stringer.key("timeZone");
+			toJSON(value.getTimeZone(), stringer);
 			stringer.key("time").value(value.getTime().getTime());
 			stringer.endObject();
 		}
