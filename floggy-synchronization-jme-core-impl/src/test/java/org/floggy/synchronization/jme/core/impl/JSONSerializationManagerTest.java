@@ -151,6 +151,41 @@ public class JSONSerializationManagerTest extends TestCase {
 	*
 	* @throws Exception DOCUMENT ME!
 	*/
+	public void testReceiveCharNotNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "character";
+		Character value = new Character('F');
+
+		jsonObject.put(name, value);
+
+		Character actual = JSONSerializationManager.receiveChar(name, jsonObject);
+
+		assertEquals(value, actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
+	public void testReceiveCharNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "character";
+		Character value = null;
+
+		jsonObject.put(name, value);
+
+		System.out.println(jsonObject);
+		Character actual = JSONSerializationManager.receiveChar(name, jsonObject);
+
+		assertNull(actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
 	public void testSendBooleanNotNull() throws Exception {
 		JSONStringer stringer = new JSONStringer();
 		String name = "firstName";

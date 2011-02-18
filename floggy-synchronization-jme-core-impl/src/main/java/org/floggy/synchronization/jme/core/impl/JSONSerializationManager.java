@@ -121,9 +121,13 @@ public class JSONSerializationManager {
 	*/
 	public static Character receiveChar(String name, JSONObject jsonObject)
 		throws JSONException {
-		int value = jsonObject.getInt(name);
+		String value = jsonObject.optString(name);
 
-		return new Character((char) value);
+		if (value.length() != 0) {
+			return new Character(value.charAt(0));
+		}
+
+		return null;
 	}
 
 	/**
