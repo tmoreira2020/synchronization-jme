@@ -22,6 +22,7 @@ import java.util.Stack;
 import java.util.TimeZone;
 import java.util.Vector;
 
+import org.floggy.org.json.me.JSONObject;
 import org.floggy.org.json.me.JSONStringer;
 
 import junit.framework.TestCase;
@@ -33,6 +34,40 @@ import junit.framework.TestCase;
 * @version $Revision$
  */
 public class JSONSerializationManagerTest extends TestCase {
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
+	public void testReceiveBooleanNotNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "firstName";
+		Boolean value = Boolean.TRUE;
+
+		jsonObject.put(name, value);
+
+		Boolean actual = JSONSerializationManager.receiveBoolean(name, jsonObject);
+
+		assertEquals(value, actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
+	public void testReceiveBooleanNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "firstName";
+		Boolean value = null;
+
+		jsonObject.put(name, value);
+
+		Boolean actual = JSONSerializationManager.receiveBoolean(name, jsonObject);
+
+		assertNull(actual);
+	}
+
 	/**
 	* DOCUMENT ME!
 	*

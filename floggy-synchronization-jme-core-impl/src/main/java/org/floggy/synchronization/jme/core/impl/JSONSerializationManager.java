@@ -53,9 +53,15 @@ public class JSONSerializationManager {
 	*/
 	public static Boolean receiveBoolean(String name, JSONObject jsonObject)
 		throws JSONException {
-		boolean value = jsonObject.getBoolean(name);
 
-		return (value) ? Boolean.TRUE : Boolean.FALSE;
+		Object value = jsonObject.opt(name);
+
+		if (value != null) {
+			return (((Boolean)value).booleanValue()) ? Boolean.TRUE : Boolean.FALSE;
+		}
+
+		return null;
+
 	}
 
 	/**
