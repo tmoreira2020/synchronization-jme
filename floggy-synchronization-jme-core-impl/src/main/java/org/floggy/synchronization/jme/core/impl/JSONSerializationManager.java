@@ -61,7 +61,6 @@ public class JSONSerializationManager {
 		}
 
 		return null;
-
 	}
 
 	/**
@@ -99,12 +98,12 @@ public class JSONSerializationManager {
 	public static Calendar receiveCalendar(String name, JSONObject jsonObject)
 		throws JSONException {
 		Calendar value = null;
-		JSONObject calendar = jsonObject.getJSONObject(name);
+		JSONObject calendar = jsonObject.optJSONObject(name);
 
 		if (calendar != null) {
 			value = Calendar.getInstance();
-			value.setTimeZone(TimeZone.getTimeZone(calendar.getString("timeZone")));
-			value.setTime(new Date(calendar.getLong("date")));
+			value.setTimeZone(TimeZone.getTimeZone(calendar.getJSONObject("timeZone").getString("ID")));
+			value.setTime(new Date(calendar.getLong("time")));
 		}
 
 		return value;

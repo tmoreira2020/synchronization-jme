@@ -107,6 +107,50 @@ public class JSONSerializationManagerTest extends TestCase {
 	*
 	* @throws Exception DOCUMENT ME!
 	*/
+	public void testReceiveCalendarNotNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "calendar";
+		Calendar value = Calendar.getInstance();
+		JSONObject calendar = new JSONObject();
+		JSONObject timeZone = new JSONObject();
+
+		value.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
+		value.setTimeInMillis(1234567890);
+
+		timeZone.put("ID", "America/Sao_Paulo");
+
+		calendar.put("timeZone", timeZone);
+		calendar.put("time", 1234567890);
+
+		jsonObject.put(name, calendar);
+
+		Calendar actual = JSONSerializationManager.receiveCalendar(name, jsonObject);
+
+		assertEquals(value, actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
+	public void testReceiveCalendarNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "calendar";
+		Calendar value = null;
+
+		jsonObject.put(name, value);
+
+		Calendar actual = JSONSerializationManager.receiveCalendar(name, jsonObject);
+
+		assertNull(actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
 	public void testSendBooleanNotNull() throws Exception {
 		JSONStringer stringer = new JSONStringer();
 		String name = "firstName";
