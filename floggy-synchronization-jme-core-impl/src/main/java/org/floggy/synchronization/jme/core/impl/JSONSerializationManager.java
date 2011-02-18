@@ -76,9 +76,14 @@ public class JSONSerializationManager {
 	*/
 	public static Byte receiveByte(String name, JSONObject jsonObject)
 		throws JSONException {
-		int value = jsonObject.getInt(name);
 
-		return new Byte((byte) value);
+		Object value = jsonObject.opt(name);
+
+		if (value != null) {
+			return (Byte) value;
+		}
+
+		return null;
 	}
 
 	/**

@@ -73,6 +73,40 @@ public class JSONSerializationManagerTest extends TestCase {
 	*
 	* @throws Exception DOCUMENT ME!
 	*/
+	public void testReceiveByteNotNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "firstName";
+		Byte value = new Byte((byte) 12);
+
+		jsonObject.put(name, value);
+
+		Byte actual = JSONSerializationManager.receiveByte(name, jsonObject);
+
+		assertEquals(value, actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
+	public void testReceiveByteNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "firstName";
+		Byte value = null;
+
+		jsonObject.put(name, value);
+
+		Byte actual = JSONSerializationManager.receiveByte(name, jsonObject);
+
+		assertNull(actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
 	public void testSendBooleanNotNull() throws Exception {
 		JSONStringer stringer = new JSONStringer();
 		String name = "firstName";
