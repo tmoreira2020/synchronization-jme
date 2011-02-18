@@ -175,8 +175,44 @@ public class JSONSerializationManagerTest extends TestCase {
 
 		jsonObject.put(name, value);
 
-		System.out.println(jsonObject);
 		Character actual = JSONSerializationManager.receiveChar(name, jsonObject);
+
+		assertNull(actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
+	public void testReceiveDateNotNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "date";
+		Date value = new Date(54321);
+		JSONObject date = new JSONObject();
+
+		date.put("time", 54321);
+
+		jsonObject.put(name, date);
+
+		Date actual = JSONSerializationManager.receiveDate(name, jsonObject);
+
+		assertEquals(value, actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
+	public void testReceiveDateNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "date";
+		Date value = null;
+
+		jsonObject.put(name, value);
+
+		Date actual = JSONSerializationManager.receiveDate(name, jsonObject);
 
 		assertNull(actual);
 	}

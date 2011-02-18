@@ -142,9 +142,13 @@ public class JSONSerializationManager {
 	*/
 	public static Date receiveDate(String name, JSONObject jsonObject)
 		throws JSONException {
-		long value = jsonObject.getLong(name);
+		JSONObject temp = jsonObject.optJSONObject(name);
 
-		return new Date(value);
+		if (temp != null) {
+			return new Date(temp.getLong("time"));
+		}
+
+		return null;
 	}
 
 	/**
