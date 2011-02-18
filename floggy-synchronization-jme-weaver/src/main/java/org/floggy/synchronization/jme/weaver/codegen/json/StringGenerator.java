@@ -41,8 +41,8 @@ public class StringGenerator extends SourceCodeGenerator {
 	* @throws NotFoundException DOCUMENT ME!
 	*/
 	public void initReceiveCode() throws NotFoundException {
-		addLineOfCodeToReceiveOperation("this." + fieldName + "= jsonObject.getString(\""
-			+ fieldName + "\");");
+		addLineOfCodeToReceiveOperation("this." + fieldName + "= jsonObject.optString(\""
+			+ fieldName + "\", null);");
 	}
 
 	/**
