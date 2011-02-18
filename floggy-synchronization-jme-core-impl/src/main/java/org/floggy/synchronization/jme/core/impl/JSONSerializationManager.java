@@ -167,9 +167,13 @@ public class JSONSerializationManager {
 	*/
 	public static Double receiveDouble(String name, JSONObject jsonObject)
 		throws JSONException {
-		double value = jsonObject.getDouble(name);
+		Object value = jsonObject.opt(name);
 
-		return new Double(value);
+		if (value != null) {
+			return (Double)value;
+		}
+
+		return null;
 	}
 
 	/**

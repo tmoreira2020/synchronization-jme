@@ -222,6 +222,40 @@ public class JSONSerializationManagerTest extends TestCase {
 	*
 	* @throws Exception DOCUMENT ME!
 	*/
+	public void testReceiveDoubleNotNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "double";
+		Double value = new Double(54321);
+
+		jsonObject.put(name, value);
+
+		Double actual = JSONSerializationManager.receiveDouble(name, jsonObject);
+
+		assertEquals(value, actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
+	public void testReceiveDoubleNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "double";
+		Double value = null;
+
+		jsonObject.put(name, value);
+
+		Double actual = JSONSerializationManager.receiveDouble(name, jsonObject);
+
+		assertNull(actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
 	public void testSendBooleanNotNull() throws Exception {
 		JSONStringer stringer = new JSONStringer();
 		String name = "firstName";
