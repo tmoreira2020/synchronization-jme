@@ -79,7 +79,11 @@ public class JSONSerializationManager {
 		Object value = jsonObject.opt(name);
 
 		if (value != null) {
-			return (Byte) value;
+			if (value instanceof Byte) {
+				return ((Byte) value);
+			} else if (value instanceof Integer) {
+				return new Byte(((Integer) value).byteValue());
+			}
 		}
 
 		return null;
