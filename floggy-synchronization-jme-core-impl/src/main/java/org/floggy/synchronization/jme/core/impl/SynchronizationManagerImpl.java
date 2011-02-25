@@ -62,11 +62,11 @@ public class SynchronizationManagerImpl extends SynchronizationManager {
 	/**
 	* DOCUMENT ME!
 	*
-	* @param persistable DOCUMENT ME!
+	* @param synchronizable DOCUMENT ME!
 	*
 	* @return DOCUMENT ME!
 	*/
-	public boolean isSynced(Synchronizable persistable) {
+	public boolean isSynced(Synchronizable synchronizable) {
 		return false;
 	}
 
