@@ -25,9 +25,6 @@ public abstract class SynchronizationManager {
 	/** The single instance of SynchronizationManager. */
 	private static SynchronizationManager instance;
 
-	/** DOCUMENT ME! */
-	protected String url;
-
 	/**
 	* Returns the current instance of SynchronizationManager.
 	*
@@ -64,11 +61,11 @@ public abstract class SynchronizationManager {
 	/**
 	* DOCUMENT ME!
 	*
+	* @param synchronizableClass DOCUMENT ME!
+	*
 	* @return DOCUMENT ME!
 	*/
-	public String getUrl() {
-		return url;
-	}
+	public abstract String getUrl(Class synchronizableClass);
 
 	/**
 	* Check if the object is already synchronized. <br>
@@ -95,9 +92,8 @@ public abstract class SynchronizationManager {
 	/**
 	* DOCUMENT ME!
 	*
+	* @param synchronizableClass DOCUMENT ME!
 	* @param url DOCUMENT ME!
 	*/
-	public void setUrl(String url) {
-		this.url = url;
-	}
+	public abstract void setUrl(Class synchronizableClass, String url);
 }

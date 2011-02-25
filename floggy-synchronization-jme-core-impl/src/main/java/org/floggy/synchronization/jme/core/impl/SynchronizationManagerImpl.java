@@ -18,6 +18,8 @@ package org.floggy.synchronization.jme.core.impl;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
+import java.util.Hashtable;
+
 import javax.microedition.io.Connector;
 import javax.microedition.io.HttpConnection;
 
@@ -34,11 +36,27 @@ import org.floggy.synchronization.jme.core.SynchronizationManager;
 * @version $Revision$
  */
 public class SynchronizationManagerImpl extends SynchronizationManager {
+	/** DOCUMENT ME! */
+	protected Hashtable urls = new Hashtable();
+
 /**
-   * Creates a new instance of PersistableManager.
+   * Creates a new instance of SynchronizationManager.
    */
 	public SynchronizationManagerImpl() throws Exception {
 		SynchronizableMetadataManager.init();
+	}
+
+	/**
+	 * DOCUMENT ME!
+	*
+	* @param synchronizableClass DOCUMENT ME!
+	*
+	* @return DOCUMENT ME!
+	*/
+	public String getUrl(Class synchronizableClass) {
+		Utils.validateSynchronizableClassArgument(synchronizableClass);
+
+		return (String) urls.get(synchronizableClass);
 	}
 
 	/**
@@ -97,5 +115,17 @@ public class SynchronizationManagerImpl extends SynchronizationManager {
 		}
 
 		return 0;
+	}
+
+	/**
+	 * DOCUMENT ME!
+	*
+	* @param synchronizableClass DOCUMENT ME!
+	* @param url DOCUMENT ME!
+	*/
+	public void setUrl(Class synchronizableClass, String url) {
+		Utils.validateSynchronizableClassArgument(synchronizableClass);
+
+		urls.put(synchronizableClass, url);
 	}
 }
