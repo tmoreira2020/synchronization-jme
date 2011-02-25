@@ -15,6 +15,7 @@
  */
 package org.floggy.synchronization.jme.core.impl;
 
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
@@ -23,6 +24,7 @@ import java.util.Stack;
 import java.util.TimeZone;
 import java.util.Vector;
 
+import org.floggy.org.json.me.JSONArray;
 import org.floggy.org.json.me.JSONException;
 import org.floggy.org.json.me.JSONObject;
 import org.floggy.org.json.me.JSONStringer;
@@ -204,8 +206,29 @@ public class JSONSerializationManager {
 	* @throws JSONException DOCUMENT ME!
 	*/
 	public static Hashtable receiveHashtable(String name, JSONObject jsonObject)
-		throws JSONException {
-		throw new JSONException("Not implemented!");
+		throws Exception {
+
+		JSONArray array = jsonObject.optJSONArray(name);
+
+		if (array != null) {
+			Hashtable temp = new Hashtable();
+
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject keyValuePair = array.optJSONObject(i);
+
+				JSONObject jsonKey = keyValuePair.getJSONObject("key");
+				JSONObject jsonValue = keyValuePair.optJSONObject("value");
+
+				Object key = fromJSON(jsonKey);
+				Object value = fromJSON(jsonValue);
+
+				temp.put(key, value);
+			}
+
+			return temp;
+		}
+
+		return null;
 	}
 
 	/**
@@ -746,6 +769,18 @@ public class JSONSerializationManager {
 			}
 
 			stringer.endArray();
+		}
+	}
+	
+	protected static Object fromJSON(JSONObject jsonObject) throws Exception {
+		String className = jsonObject.getString("className");
+
+		if (className.equals("java.lang.String")) {
+			return jsonObject.getString("value");
+		} else if (className.equals("java.lang.Byte")) {
+			return new Byte((byte)jsonObject.getInt("value"));
+		} else {
+			throw new SynchronizationException(className + " not supported!");
 		}
 	}
 }

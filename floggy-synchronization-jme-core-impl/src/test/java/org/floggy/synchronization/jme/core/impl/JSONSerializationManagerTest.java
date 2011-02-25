@@ -22,6 +22,7 @@ import java.util.Stack;
 import java.util.TimeZone;
 import java.util.Vector;
 
+import org.floggy.org.json.me.JSONArray;
 import org.floggy.org.json.me.JSONObject;
 import org.floggy.org.json.me.JSONStringer;
 
@@ -247,6 +248,60 @@ public class JSONSerializationManagerTest extends TestCase {
 		jsonObject.put(name, value);
 
 		Double actual = JSONSerializationManager.receiveDouble(name, jsonObject);
+
+		assertNull(actual);
+	}
+	
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
+	public void testReceiveHashtableNotNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		JSONObject keyValuePair = new JSONObject();
+		String name = "hashtable";
+		Hashtable expected = new Hashtable();
+		JSONArray array = new JSONArray();
+		JSONObject key = new JSONObject();
+		JSONObject value = new JSONObject();
+		
+		Object o = "byte"; 
+		key.put("className", o.getClass().getName());
+		key.put("value", o);
+
+		o = new Byte((byte)87);
+		value.put("className", o.getClass().getName());
+		value.put("value", o);
+
+		keyValuePair.put("key", key);
+		keyValuePair.put("value", value);
+
+
+		array.put(keyValuePair);
+
+		jsonObject.put(name, array);
+
+		expected.put("byte", o);
+
+		Hashtable actual = JSONSerializationManager.receiveHashtable(name, jsonObject);
+
+		assertEquals(expected, actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
+	public void testReceiveHashtableNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "hashtable";
+		Hashtable value = null;
+
+		jsonObject.put(name, value);
+
+		Hashtable actual = JSONSerializationManager.receiveHashtable(name, jsonObject);
 
 		assertNull(actual);
 	}
@@ -878,4 +933,13 @@ public class JSONSerializationManagerTest extends TestCase {
 
 		assertEquals(expected, stringer.toString());
 	}
+
+	protected JSONObject createJSONObject(String name, Object value) throws Exception {
+		JSONObject jsonObject = new JSONObject();
+
+		jsonObject.put(name, value);
+		
+		return jsonObject;
+	}
+
 }
