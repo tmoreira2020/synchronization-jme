@@ -281,9 +281,15 @@ public class JSONSerializationManager {
 	*/
 	public static Long receiveLong(String name, JSONObject jsonObject)
 		throws JSONException {
-		long value = jsonObject.getLong(name);
+		Object value = jsonObject.opt(name);
 
-		return new Long(value);
+		if (value != null) {
+			if (value instanceof Long) {
+				return (Long) value;
+			}
+		}
+
+		return null;
 	}
 
 	/**

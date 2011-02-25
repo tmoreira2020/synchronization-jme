@@ -379,6 +379,40 @@ public class JSONSerializationManagerTest extends TestCase {
 	*
 	* @throws Exception DOCUMENT ME!
 	*/
+	public void testReceiveLongNotNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "long";
+		Long value = new Long(3425);
+
+		jsonObject.put(name, value);
+
+		Long actual = JSONSerializationManager.receiveLong(name, jsonObject);
+
+		assertEquals(value, actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
+	public void testReceiveLongNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "long";
+		Long value = null;
+
+		jsonObject.put(name, value);
+
+		Long actual = JSONSerializationManager.receiveLong(name, jsonObject);
+
+		assertNull(actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
 	public void testSendBooleanNotNull() throws Exception {
 		JSONStringer stringer = new JSONStringer();
 		String name = "firstName";
