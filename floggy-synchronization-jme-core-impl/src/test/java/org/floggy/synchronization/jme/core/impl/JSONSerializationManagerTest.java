@@ -311,6 +311,74 @@ public class JSONSerializationManagerTest extends TestCase {
 	*
 	* @throws Exception DOCUMENT ME!
 	*/
+	public void testReceiveIntNotNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "int";
+		int value = 3425;
+
+		jsonObject.put(name, value);
+
+		int actual = JSONSerializationManager.receiveInt(name, jsonObject);
+
+		assertEquals(value, actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
+	public void testReceiveIntNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "integer";
+		Integer value = null;
+
+		jsonObject.put(name, value);
+
+		int actual = JSONSerializationManager.receiveInt(name, jsonObject);
+
+		assertEquals(0, actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
+	public void testReceiveIntegerNotNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "integer";
+		Integer value = new Integer(25);
+
+		jsonObject.put(name, value);
+
+		Integer actual = JSONSerializationManager.receiveInteger(name, jsonObject);
+
+		assertEquals(value, actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
+	public void testReceiveIntegerNull() throws Exception {
+		JSONObject jsonObject = new JSONObject();
+		String name = "integer";
+		Integer value = null;
+
+		jsonObject.put(name, value);
+
+		Integer actual = JSONSerializationManager.receiveInteger(name, jsonObject);
+
+		assertNull(actual);
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
+	* @throws Exception DOCUMENT ME!
+	*/
 	public void testSendBooleanNotNull() throws Exception {
 		JSONStringer stringer = new JSONStringer();
 		String name = "firstName";

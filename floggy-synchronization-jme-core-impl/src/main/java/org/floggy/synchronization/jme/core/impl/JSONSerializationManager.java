@@ -243,7 +243,7 @@ public class JSONSerializationManager {
 	*/
 	public static int receiveInt(String name, JSONObject jsonObject)
 		throws JSONException {
-		return jsonObject.getInt(name);
+		return jsonObject.optInt(name);
 	}
 
 	/**
@@ -258,9 +258,15 @@ public class JSONSerializationManager {
 	*/
 	public static Integer receiveInteger(String name, JSONObject jsonObject)
 		throws JSONException {
-		int value = jsonObject.getInt(name);
+		Object value = jsonObject.opt(name);
 
-		return new Integer(value);
+		if (value != null) {
+			if (value instanceof Integer) {
+				return (Integer) value;
+			}
+		}
+
+		return null;
 	}
 
 	/**
