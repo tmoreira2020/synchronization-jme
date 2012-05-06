@@ -20,9 +20,13 @@ import java.io.Writer;
 
 import java.util.Hashtable;
 
+import javax.microedition.io.Connection;
 import javax.microedition.io.Connector;
 import javax.microedition.io.HttpConnection;
+import javax.microedition.io.InputConnection;
+import javax.microedition.io.StreamConnection;
 
+import org.floggy.org.json.me.JSONObject;
 import org.floggy.org.json.me.JSONTokener;
 
 import org.floggy.synchronization.jme.core.Synchronizable;
@@ -90,27 +94,60 @@ public class SynchronizationManagerImpl extends SynchronizationManager {
 		String jsonClassRepresentation = metadata.toJSON();
 
 		try {
-			HttpConnection connection = (HttpConnection) Connector.open(getUrl());
+			Connection connection = Connector.open(getUrl(synchronizableClass));
 
-			connection.setRequestMethod(HttpConnection.POST);
+			if (connection instanceof HttpConnection) {
+				HttpConnection httpConnection = (HttpConnection) connection;
 
-			Writer writer = new OutputStreamWriter(connection.openOutputStream());
+				httpConnection.setRequestMethod(HttpConnection.POST);
 
-			writer.write(jsonClassRepresentation);
-			writer.close();
+				Writer writer =
+					new OutputStreamWriter(httpConnection.openOutputStream());
 
-			int responseCode = connection.getResponseCode();
+				writer.write(jsonClassRepresentation);
+				writer.close();
 
-			if (responseCode == HttpConnection.HTTP_OK) {
+				int responseCode = httpConnection.getResponseCode();
+
+				if (responseCode == HttpConnection.HTTP_OK) {
+					JSONTokener tokener =
+						new JSONTokener(Utils.readInputStream(
+								httpConnection.openInputStream()));
+
+					while (tokener.more()) {
+						Object object = tokener.nextValue();
+						System.out.println(object);
+					}
+				}
+			} else if (connection instanceof StreamConnection) {
+				StreamConnection streamConnection = (StreamConnection) connection;
+
 				JSONTokener tokener =
-					new JSONTokener(Utils.readInputStream(connection.openInputStream()));
+					new JSONTokener(Utils.readInputStream(
+							streamConnection.openInputStream()));
 
 				while (tokener.more()) {
 					Object object = tokener.nextValue();
 					System.out.println(object);
 				}
+			} else if (connection instanceof InputConnection) {
+				InputConnection inputConnection = (InputConnection) connection;
+
+				JSONTokener tokener =
+					new JSONTokener(Utils.readInputStream(
+							inputConnection.openInputStream()));
+
+				while (tokener.more()) {
+					JSONObject jsonObject = (JSONObject)tokener.nextValue();
+					System.out.println(jsonObject);
+					
+					__Synchronizable synchronizable = Utils.createInstance(synchronizableClass);
+					
+					synchronizable.__receive(jsonObject);
+				}
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw Utils.handleException(e);
 		}
 

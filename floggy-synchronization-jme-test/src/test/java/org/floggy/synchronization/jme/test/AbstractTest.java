@@ -19,18 +19,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.StringReader;
 import java.lang.reflect.Method;
-
 import java.util.Arrays;
+
+import net.sourceforge.floggy.persistence.Filter;
+import net.sourceforge.floggy.persistence.Persistable;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.floggy.org.json.me.JSONStringer;
-
 import org.floggy.synchronization.jme.core.Synchronizable;
+import org.floggy.synchronization.jme.core.SynchronizationManager;
 import org.floggy.synchronization.jme.core.impl.__Synchronizable;
-
-import net.sourceforge.floggy.persistence.Filter;
-import net.sourceforge.floggy.persistence.Persistable;
 
 /**
 * DOCUMENT ME!
@@ -146,15 +145,30 @@ public abstract class AbstractTest extends FloggyBaseTest {
 
 		synchronizable.__send(stringer);
 
-		String className = getClass().getName();
-		String dir = getClass().getPackage().getName();
-		
+		String className = synchronizable.getClass().getName();
+		String dir = synchronizable.getClass().getPackage().getName();
+
 		dir = "src/main/resources/" + dir.replace('.', '/');
-		
-		className = "src/main/resources/" + className.replace('.', '/').concat(".json");
+
+		className = "src/main/resources/"
+			+ className.replace('.', '/').concat(".json");
 
 		FileUtils.forceMkdir(new File(dir));
-		IOUtils.copy(new StringReader(stringer.toString()), new FileOutputStream(className));
+		IOUtils.copy(new StringReader(stringer.toString()),
+			new FileOutputStream(className));
+	}
+	
+	public void testreceive() throws Exception {
+		SynchronizationManager sm = SynchronizationManager.getInstance();
+
+		Class synchronizableClass = newInstance().getClass(); 
+
+		String url = "classpath:/" + synchronizableClass.getName().replace('.', '/') + ".json";
+
+		sm.setUrl(synchronizableClass, url);
+
+		int size = sm.receive(synchronizableClass);
+		System.out.println(size);
 	}
 
 	/**

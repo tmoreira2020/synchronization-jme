@@ -98,6 +98,17 @@ public abstract class SourceCodeGenerator {
 	/**
 	* DOCUMENT ME!
 	*
+	* @return DOCUMENT ME!
+	*
+	* @throws NotFoundException DOCUMENT ME!
+	*/
+	public String getReceiveArrayCode(String indexForIteration) throws NotFoundException {
+		return "System.err.println(jsonArray.get(" + indexForIteration + "));";
+	}
+
+	/**
+	* DOCUMENT ME!
+	*
 	* @throws NotFoundException DOCUMENT ME!
 	*/
 	public abstract void initSendCode() throws NotFoundException;

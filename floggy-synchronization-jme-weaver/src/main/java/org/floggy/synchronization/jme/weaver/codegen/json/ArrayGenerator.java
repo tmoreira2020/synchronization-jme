@@ -51,7 +51,7 @@ public class ArrayGenerator extends SourceCodeGenerator
 		SourceCodeGenerator generator;
 
 		addLineOfCodeToReceiveOperation(
-			"org.floggy.org.json.me.JSONArray jsonArray = jsonObject.getJSONArray(\""
+			"org.floggy.org.json.me.JSONArray jsonArray = jsonObject.optJSONArray(\""
 			+ fieldName + "\");");
 		addLineOfCodeToReceiveOperation("if (jsonArray != null) {");
 		addLineOfCodeToReceiveOperation("int count = jsonArray.length();");
@@ -61,7 +61,7 @@ public class ArrayGenerator extends SourceCodeGenerator
 			+ indexForIteration + " < count; " + indexForIteration + "++) {");
 		generator = SourceCodeGeneratorFactory.getSourceCodeGenerator(persistableType,
 				fieldName + "[" + indexForIteration + "]", fieldType.getComponentType());
-		addLineOfCodeToReceiveOperation(generator.getReceiveCode());
+		addLineOfCodeToReceiveOperation(generator.getReceiveArrayCode(indexForIteration));
 		addLineOfCodeToReceiveOperation("}");
 		addLineOfCodeToReceiveOperation("}");
 		addLineOfCodeToReceiveOperation("else {");

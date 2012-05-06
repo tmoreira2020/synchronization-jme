@@ -304,9 +304,13 @@ public class JSONSerializationManager {
 	*/
 	public static final Object receiveObject(String name, JSONObject jsonObject)
 		throws Exception {
-		Object value = null;
+		JSONObject value = jsonObject.optJSONObject(name);
 
-		return value;
+		if (value != null) {
+			return fromJSON(value);
+		}
+
+		return null;
 	}
 
 	/**

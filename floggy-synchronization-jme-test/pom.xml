@@ -94,6 +94,12 @@
 				</includes>
 				<targetPath>net/sourceforge/floggy</targetPath>
 			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.json</include>
+				</includes>
+			</resource>
 		</resources>
 		<testResources>
 			<testResource>
@@ -132,6 +138,9 @@
 					<excludes>
 						<exclude>**/HashtableTest.java</exclude>
 						<exclude>**/PersistableTest.java</exclude>
+						<exclude>**/NoneFieldTest.java</exclude>
+						<exclude>**/ShortTest.java</exclude>
+						<exclude>**/StackTest.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
